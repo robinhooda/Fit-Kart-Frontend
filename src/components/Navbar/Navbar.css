@@ -1,0 +1,32 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid black;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #2874f0;
+  color: white;
+  z-index: 1;
+  height: 10vh;
+}
+
+.navbar-brand {
+  width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.navbar-links {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.bold {
+  font-weight: 700;
+}

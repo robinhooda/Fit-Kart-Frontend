@@ -1,0 +1,42 @@
+.Shop {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    'main'
+    'aside';
+}
+
+.main {
+  grid-area: main;
+  padding: 2rem;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  justify-items: center;
+}
+
+/* to do - make 480 px */
+@media screen and (min-width: 500px) {
+  .Shop {
+    height: 90vh;
+    width: 100vw;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 15rem auto;
+    grid-template-areas: 'aside main';
+  }
+  .main {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    justify-items: center;
+  }
+}
+
+/* for wraping the overflow content */
+.content-wrap {
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+}

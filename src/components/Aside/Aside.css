@@ -1,0 +1,50 @@
+.aside {
+    grid-area: aside;
+    border-top: 1px solid black;
+    min-width: 100%;
+    position: fixed;
+    bottom: 0;
+    z-index: 2;
+    background-color: black;
+    color: white;
+    height: 8vh;
+  }
+
+
+
+/* to do - make 480 px */
+@media screen and (min-width: 500px) {
+    
+    .aside {
+      grid-area: aside;
+      border-right: 1px solid black;
+      max-width: 15rem;
+      min-height: 90vh;
+      min-width: 15rem;
+      top: 10vh;
+      background-color: white;
+      color: black;
+      padding: 1rem;
+    }
+    .aside-heading {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  
+    .aside-heading--options {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1rem;
+    }
+    .aside-heading--options label{
+      padding: 0.5rem;
+    }
+    .aside-input{
+      margin-right: 0.5rem;
+    }
+  
+  }
+  

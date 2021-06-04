@@ -1,0 +1,9 @@
+.card:hover {
+  box-shadow: 7px 8px 16px -4px rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: 7px 8px 16px -4px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: 7px 8px 16px -4px rgba(0, 0, 0, 0.6);
+}
+
+.red {
+  color: red;
+}
