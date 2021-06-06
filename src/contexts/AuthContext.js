@@ -4,7 +4,7 @@ const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(
-    JSON.parse(localStorage.getItem('auth')) || null
+    JSON.parse(localStorage.getItem('auth-token')) || null
   )
 
   return (

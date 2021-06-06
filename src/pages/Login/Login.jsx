@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import LoginSVG from '../../assets/images/welcome.svg'
 import Loader from '../../components/Loader/Loader'
+import { useAuth } from '../../contexts/AuthContext'
 import axios from 'axios'
 import '../SignUp/SignUp.css'
 
@@ -10,7 +11,9 @@ const Login = () => {
     email: '',
     password: '',
   })
+  const [error, setError] = useState('')
   const [isloading, setIsloading] = useState(false)
+  const { setAuth } = useAuth()
 
   const inputEvent = (event) => {
     event.preventDefault()
@@ -44,9 +47,20 @@ const Login = () => {
         password: userData.password,
       })
       console.log(response.data.token)
-      localStorage.setItem('auth-token', response.data.token)
-      alert('logged in!')
       setUserData({ email: '', password: '' })
+
+      const authToken = response.data.token
+      if (!authToken) {
+        setError(response.data.message)
+      } else {
+        setAuth(authToken)
+        setAuth((prev) => {
+          localStorage.setItem('auth-token', JSON.stringify(prev))
+          return prev
+        })
+      }
+
+      alert('logged in!')
     } catch (err) {
       console.log(err)
     }
