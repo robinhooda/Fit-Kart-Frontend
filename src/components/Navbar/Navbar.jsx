@@ -9,6 +9,11 @@ const Navbar = () => {
 
   const { auth, setAuth } = useAuth()
 
+  const logout = () => {
+    setAuth(null)
+    localStorage.clear()
+  }
+
   console.log(auth)
   return (
     <nav className='navbar'>
@@ -59,7 +64,7 @@ const Navbar = () => {
           </Link>
         </div>
         {auth ? (
-          <button className='transparent-button' onClick={() => setAuth(null)}>
+          <button className='transparent-button' onClick={logout}>
             Logout
           </button>
         ) : (
