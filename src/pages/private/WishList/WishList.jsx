@@ -1,7 +1,7 @@
 import React from 'react'
-import { useCart } from '../../contexts/cart-context'
-import WishListCard from '../../components/WishListCard/WishListCard'
-import NoItemsFoundSVG from '../../assets/images/empty.svg'
+import { useCart } from '../../../contexts/cart-context'
+import WishListCard from '../../../components/WishListCard/WishListCard'
+import NoItemsFoundSVG from '../../../assets/images/empty.svg'
 import { Link } from 'react-router-dom'
 import './WishList.css'
 const WishList = () => {
