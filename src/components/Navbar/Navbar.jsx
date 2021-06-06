@@ -9,10 +9,6 @@ const Navbar = () => {
 
   const { auth, setAuth } = useAuth()
 
-  const logout = () => {
-    setAuth(null)
-  }
-
   console.log(auth)
   return (
     <nav className='navbar'>
@@ -50,7 +46,7 @@ const Navbar = () => {
             className={pathname === '/wishlist' ? 'links bold' : 'links'}
             to='/wishlist'
           >
-            Wishlist
+            <i class='fas fa-heart pad-r-xs'></i>Wishlist
           </Link>
         </div>
         <div>
@@ -58,11 +54,12 @@ const Navbar = () => {
             className={pathname === '/cart' ? 'links bold' : 'links'}
             to='/cart'
           >
+            <i class='fas fa-shopping-cart pad-r-xs'></i>
             Cart
           </Link>
         </div>
         {auth ? (
-          <button className='transparent-button' onClick={logout}>
+          <button className='transparent-button' onClick={() => setAuth(null)}>
             Logout
           </button>
         ) : (
