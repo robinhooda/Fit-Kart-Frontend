@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Navbar.css'
 import { Link } from 'react-router-dom'
 import { MdFitnessCenter } from 'react-icons/md'
 import { useLocation } from 'react-router-dom'
+import { useAuth } from '../../contexts/AuthContext'
 const Navbar = () => {
   const { pathname } = useLocation()
-  console.log(pathname)
 
+  const { auth, setAuth } = useAuth()
+
+  const logout = () => {
+    setAuth(null)
+  }
+
+  console.log(auth)
   return (
     <nav className='navbar'>
       <div class='navbar-brand'>
@@ -26,41 +33,56 @@ const Navbar = () => {
       </div>
       <div className='navbar-links'>
         <div>
-          <Link className={pathname==="/"?"links bold":"links"} to='/'>
+          <Link className={pathname === '/' ? 'links bold' : 'links'} to='/'>
             Home
           </Link>
         </div>
         <div>
-          <Link className={pathname==="/shop"?"links bold":"links"} to='/shop'>
+          <Link
+            className={pathname === '/shop' ? 'links bold' : 'links'}
+            to='/shop'
+          >
             Shop
           </Link>
         </div>
         <div>
-          <Link className={pathname==="/wishlist"?"links bold":"links"} to='/wishlist'>
+          <Link
+            className={pathname === '/wishlist' ? 'links bold' : 'links'}
+            to='/wishlist'
+          >
             Wishlist
           </Link>
         </div>
         <div>
-          <Link className={pathname==="/cart"?"links bold":"links"} to='/cart'>
+          <Link
+            className={pathname === '/cart' ? 'links bold' : 'links'}
+            to='/cart'
+          >
             Cart
           </Link>
         </div>
-        <div>
-          <Link className={pathname==="/login"?"links bold":"links"} to='/login'>
-            Login
-          </Link>
-        </div>
-        <Link className={pathname==="/signUp"?"links bold":"links"} to='/signUp'>
-          <div
-            style={{
-              border: '1px solid white',
-              padding: '8px 20px',
-              borderRadius: '11rem',
-            }}
-          >
-            Register
-          </div>
-        </Link>
+        {auth ? (
+          <button className='transparent-button' onClick={logout}>
+            Logout
+          </button>
+        ) : (
+          <>
+            <div>
+              <Link
+                className={pathname === '/login' ? 'links bold' : 'links'}
+                to='/login'
+              >
+                Login
+              </Link>
+            </div>
+            <Link
+              className={pathname === '/signUp' ? 'links bold' : 'links'}
+              to='/signUp'
+            >
+              <button className='transparent-button'>Register</button>
+            </Link>
+          </>
+        )}
       </div>
     </nav>
   )
