@@ -1,6 +1,6 @@
 # Fit-Kart-Frontend
 
-Ecommerce regarding supplements
+Ecommerce for health supplements
 
 
 # Getting Started with Create React App
