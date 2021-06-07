@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './SignUp.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Loader from '../../components/Loader/Loader'
 import axios from 'axios'
 const SignUp = () => {
@@ -11,6 +11,7 @@ const SignUp = () => {
     password: '',
   })
   const [isloading, setIsloading] = useState(false)
+  const navigate = useNavigate()
 
   const inputEvent = (event) => {
     const value = event.target.value
@@ -55,6 +56,7 @@ const SignUp = () => {
       })
       console.log({ response })
       setUserData({ firstName: '', lastName: '', email: '', password: '' })
+      navigate('/login')
     } catch (err) {
       console.log(err)
     }

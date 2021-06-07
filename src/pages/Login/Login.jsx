@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import LoginSVG from '../../assets/images/welcome.svg'
 import Loader from '../../components/Loader/Loader'
 import { useAuth } from '../../contexts/AuthContext'
@@ -14,6 +14,9 @@ const Login = () => {
   const [error, setError] = useState('')
   const [isloading, setIsloading] = useState(false)
   const { setAuth } = useAuth()
+
+  const { state } = useLocation()
+  const navigate = useNavigate()
 
   const inputEvent = (event) => {
     event.preventDefault()
@@ -46,7 +49,7 @@ const Login = () => {
         email: userData.email,
         password: userData.password,
       })
-      console.log(response.data.token)
+      console.log(response)
       setUserData({ email: '', password: '' })
 
       const authToken = response.data.token
@@ -58,10 +61,10 @@ const Login = () => {
           localStorage.setItem('auth-token', JSON.stringify(prev))
           return prev
         })
+        navigate(state?.from ? state.from : '/shop')
       }
-
-      alert('logged in!')
     } catch (err) {
+      alert('Credentials not correct!', err.message)
       console.log(err)
     }
     setIsloading(false)
