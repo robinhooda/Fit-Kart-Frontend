@@ -32,7 +32,7 @@ const WishList = () => {
             url={product.url}
             price={product.price}
             discount={product.discount}
-            isNew={product.isNew}
+            isNew={product.isNewStock}
           />
         )
       })}
