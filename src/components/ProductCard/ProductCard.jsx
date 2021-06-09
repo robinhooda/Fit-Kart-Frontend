@@ -3,7 +3,15 @@ import { Link } from 'react-router-dom'
 import { useCart } from '../../contexts/cart-context'
 import './ProductCard.css'
 
-const ProductCard = ({ id, url, name, subHeading, price, discount, isNew }) => {
+const ProductCard = ({
+  id,
+  url,
+  name,
+  subHeading,
+  price,
+  discount,
+  isNewStock,
+}) => {
   const { state, dispatch } = useCart()
   const [isAdded, setIsAdded] = useState(false)
   const [isWishlisted, setIsWishlisted] = useState(false)
@@ -21,7 +29,7 @@ const ProductCard = ({ id, url, name, subHeading, price, discount, isNew }) => {
   return (
     <div class='card'>
       <div class='thumbnail'>
-        {isNew && (
+        {isNewStock && (
           <>
             <div class='card-badge'>
               <div class='box1'></div>
@@ -30,7 +38,9 @@ const ProductCard = ({ id, url, name, subHeading, price, discount, isNew }) => {
             <span class='card-badge-text bold'>NEW</span>
           </>
         )}
-        <img src={url} alt='productImage' />
+        <div class="product-image">
+          <img src={url} alt='productImage' />
+        </div>
       </div>
       <div class='card-content'>
         <div class='flex'>
