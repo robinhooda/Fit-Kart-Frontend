@@ -1,5 +1,4 @@
 import React from 'react'
-import productImage from '../../assets/images/img1.png'
 import { useCart } from '../../contexts/cart-context'
 import './CartCard.css'
 
@@ -11,11 +10,7 @@ const CartCard = ({ id, name, quantity, url, price, discount, isNew }) => {
     <div className='horizontal-card mar-b-sm'>
       <div className='horizontal-card__cart-item'>
         <div className='cart-item__img'>
-          <img
-            className='responsive-img'
-            alt='productImage'
-            src={productImage}
-          />
+          <img className='cart-product-img' alt='productImage' src={url} />
         </div>
         <div className='cart-item__flex line-height-190'>
           <div className='cart-item__details'>
