@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './Navbar.css'
 import { Link } from 'react-router-dom'
 import { MdFitnessCenter } from 'react-icons/md'
@@ -14,10 +14,9 @@ const Navbar = () => {
     localStorage.clear()
   }
 
-  console.log(auth)
   return (
     <nav className='navbar'>
-      <div class='navbar-brand'>
+      <div className='navbar-brand'>
         <MdFitnessCenter size={35} />
         <div className='navbar-brand--name  bold'>Fit-Kart</div>
       </div>
@@ -51,7 +50,7 @@ const Navbar = () => {
             className={pathname === '/wishlist' ? 'links bold' : 'links'}
             to='/wishlist'
           >
-            <i class='fas fa-heart pad-r-xs'></i>Wishlist
+            <i className='fas fa-heart pad-r-xs'></i>Wishlist
           </Link>
         </div>
         <div>
@@ -59,7 +58,7 @@ const Navbar = () => {
             className={pathname === '/cart' ? 'links bold' : 'links'}
             to='/cart'
           >
-            <i class='fas fa-shopping-cart pad-r-xs'></i>
+            <i className='fas fa-shopping-cart pad-r-xs'></i>
             Cart
           </Link>
         </div>
