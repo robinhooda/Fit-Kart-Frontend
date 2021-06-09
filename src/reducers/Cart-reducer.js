@@ -1,6 +1,18 @@
 export const cartReducer = (products) => {
   return (cartReducerState, action) => {
     switch (action.type) {
+      case 'LOAD_CART':
+        const apiCart = action.payload
+        const loadedCart = apiCart.map((item) => ({
+          ...item.product,
+          quantity: item.quantity,
+        }))
+        return { ...cartReducerState, cart: [...loadedCart] }
+
+      case 'LOAD_WISHLIST':
+        const loadedWishList = action.payload
+        return { ...cartReducerState, wishlist: [...loadedWishList] }
+
       case 'ADD_TO_CART':
         let addedProduct = products.find(
           (item) => item._id === action.payload.productId
