@@ -43,7 +43,8 @@ const Login = () => {
         email: userData.email,
         password: userData.password,
       })
-      console.log({ response })
+      console.log(response.data.token)
+      localStorage.setItem('auth-token', response.data.token)
       alert('logged in!')
       setUserData({ email: '', password: '' })
     } catch (err) {
