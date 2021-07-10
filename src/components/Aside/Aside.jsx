@@ -6,8 +6,11 @@ function Aside() {
     <div className='aside'>
       <div className='aside-options'>
         <div className='aside-heading'>
-          <div className='bold'>Sort By</div>
-          <button class="secondary-button xs-button">Clear All</button>
+          <div className='bold'>
+            <i className='fas fa-sort-amount-down pad-r-xs'></i>
+            Sort By
+          </div>
+          <button className='secondary-button xs-button'>Clear All</button>
         </div>
         <div className='aside-heading--options'>
           <label>
@@ -38,7 +41,9 @@ function Aside() {
       </div>
       <div className='aside-options'>
         <div className='aside-heading'>
-          <div className='bold'>Filters</div>
+          <div className='bold'>
+            <i className='fas fa-filter pad-r-xs'></i>Filters
+          </div>
         </div>
         <div className='aside-heading--options'>
           <label>
@@ -63,7 +68,9 @@ function Aside() {
       </div>
       <div className='aside-options'>
         <div className='aside-heading'>
-          <div className='bold'>Filters By Brand</div>
+          <div className='bold'>
+            <i className='fas fa-filter pad-r-xs'></i>Filters By Brand
+          </div>
         </div>
         <div className='aside-heading--options'>
           <label>

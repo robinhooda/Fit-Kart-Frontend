@@ -1,11 +1,15 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect } from 'react'
+import { useAuth } from '../../contexts/AuthContext'
 import { useCart } from '../../contexts/cart-context'
 import './CartCard.css'
 
 const CartCard = ({ id, name, quantity, url, price, discount, isNew }) => {
-  const { dispatch } = useCart()
+  const { state, dispatch } = useCart()
+  const { auth } = useAuth()
   const discountAmount = Math.floor((price * discount) / 100) * quantity
   const payableAmount = price * quantity - discountAmount
+
   return (
     <div className='horizontal-card mar-b-sm'>
       <div className='horizontal-card__cart-item'>
@@ -61,7 +65,7 @@ const CartCard = ({ id, name, quantity, url, price, discount, isNew }) => {
       </div>
       <div class='horizontal-card__btns'>
         <button
-          class='remove'
+          className='remove'
           onClick={() =>
             dispatch({
               type: 'REMOVE_FROM_CART',
@@ -72,7 +76,7 @@ const CartCard = ({ id, name, quantity, url, price, discount, isNew }) => {
           REMOVE
         </button>
         <button
-          class='move-to-wishlist'
+          className='move-to-wishlist'
           onClick={() =>
             dispatch({
               type: 'MOVE_FROM_CART_TO_WISHLIST',

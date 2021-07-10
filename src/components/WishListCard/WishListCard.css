@@ -3,3 +3,13 @@
   -webkit-box-shadow: 7px 8px 16px -4px rgba(0, 0, 0, 0.6);
   -moz-box-shadow: 7px 8px 16px -4px rgba(0, 0, 0, 0.6);
 }
+
+.product-image {
+  text-align: center;
+  padding: 1.5rem 1rem 0rem 1rem;
+}
+
+.product-image img {
+  width: 80% !important;
+  height: 210px;
+}

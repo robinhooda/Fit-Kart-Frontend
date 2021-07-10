@@ -11,7 +11,7 @@ const Navbar = () => {
 
   const logout = () => {
     setAuth(null)
-    localStorage.clear()
+    localStorage.removeItem("auth-token");
   }
 
   return (

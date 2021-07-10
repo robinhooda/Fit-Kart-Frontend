@@ -15,20 +15,22 @@ const WishListCard = ({
   const discountAmount = Math.floor((price * discount) / 100)
   const payableAmount = price - discountAmount
   return (
-    <div class='card'>
-      <div class='thumbnail'>
+    <div className='card'>
+      <div className='thumbnail'>
         {isNew && (
           <>
-            <div class='card-badge'>
-              <div class='box1'></div>
-              <div class='box2'></div>
+            <div className='card-badge'>
+              <div className='box1'></div>
+              <div className='box2'></div>
             </div>
-            <span class='card-badge-text bold'>NEW</span>
+            <span className='card-badge-text bold'>NEW</span>
           </>
         )}
-        <img src={url} alt='productImage' />
+        <div className='product-image'>
+          <img src={url} alt='productImage' />
+        </div>
         <button
-          class='cancel-button'
+          className='cancel-button'
           onClick={() =>
             dispatch({
               type: 'REMOVE_FROM_WISHLIST',
@@ -36,23 +38,23 @@ const WishListCard = ({
             })
           }
         >
-          <i class='fas fa-times-circle'></i>
+          <i className='fas fa-trash'></i>
         </button>
       </div>
-      <div class='card-content'>
-        <div class='flex'>
-          <div class='bold card-content-heading'>{name}</div>
+      <div className='card-content'>
+        <div className='flex'>
+          <div className='bold card-content-heading'>{name}</div>
         </div>
 
-        <div class='thin card-content-subHeading'>{subHeading}</div>
-        <div class='card-content-description'>
-          <span class='bold'>Rs. {payableAmount} </span>
-          <span class='gray thin strike-through'>Rs. {price}</span>
-          <span class='dark-blue'>({discount}% OFF)</span>
+        <div className='thin card-content-subHeading'>{subHeading}</div>
+        <div className='card-content-description'>
+          <span className='bold'>Rs. {payableAmount} </span>
+          <span className='gray thin strike-through'>Rs. {price}</span>
+          <span className='dark-blue'>({discount}% OFF)</span>
         </div>
-        <div class='card-action'>
+        <div className='card-action'>
           <button
-            class='card-button'
+            className='card-button'
             onClick={() =>
               dispatch({
                 type: 'MOVE_FROM_WISHLIST_TO_CART',
@@ -62,7 +64,7 @@ const WishListCard = ({
           >
             <Link className='links' to='/cart'>
               Move to Cart
-              <i class='fas fa-arrow-right pad-l-sm'></i>
+              <i className='fas fa-arrow-right pad-l-sm'></i>
             </Link>
           </button>
         </div>

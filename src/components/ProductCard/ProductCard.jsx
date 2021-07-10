@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../contexts/AuthContext'
 import { useCart } from '../../contexts/cart-context'
 import './ProductCard.css'
 
@@ -13,12 +15,13 @@ const ProductCard = ({
   isNewStock,
 }) => {
   const { state, dispatch } = useCart()
+  const { auth } = useAuth()
   const [isAdded, setIsAdded] = useState(false)
   const [isWishlisted, setIsWishlisted] = useState(false)
   const discountAmount = Math.floor((price * discount) / 100)
   const payableAmount = price - discountAmount
 
-  useState(() => {
+  useEffect(() => {
     const isProductAdded = state.cart.find((item) => item._id === id)
     isProductAdded ? setIsAdded(true) : setIsAdded(false)
 
@@ -26,28 +29,77 @@ const ProductCard = ({
     isProductWishlisted ? setIsWishlisted(true) : setIsWishlisted(false)
   }, [state])
 
+  useEffect(() => {
+    ;(async function () {
+      try {
+        console.log('wishlist post ho rhi hai')
+        const response = await axios.post(
+          'http://localhost:3020/wishlist',
+          state.wishlist,
+          {
+            headers: {
+              'auth-token': auth,
+            },
+          }
+        )
+        const wishlistArr = response.data.wishList.wishlistItems
+        console.log({ wishlistArr })
+      } catch (err) {
+        console.log('Error!!!', err)
+      }
+    })()
+  }, [auth, state])
+
+  useEffect(() => {
+    ;(async function () {
+      const apiCart = state.cart.map((item) => {
+        const { quantity, ...product } = item
+        return {
+          product,
+          quantity,
+        }
+      })
+      try {
+        console.log('cart post ho rhi hai')
+        const response = await axios.post(
+          'http://localhost:3020/cart',
+          apiCart,
+          {
+            headers: {
+              'auth-token': auth,
+            },
+          }
+        )
+        const cart = response.data
+        console.log({ cart })
+      } catch (err) {
+        console.log('Error!!!', err)
+      }
+    })()
+  }, [auth, state])
+
   return (
-    <div class='card'>
-      <div class='thumbnail'>
+    <div className='card'>
+      <div className='thumbnail'>
         {isNewStock && (
           <>
-            <div class='card-badge'>
-              <div class='box1'></div>
-              <div class='box2'></div>
+            <div className='card-badge'>
+              <div className='box1'></div>
+              <div className='box2'></div>
             </div>
-            <span class='card-badge-text bold'>NEW</span>
+            <span className='card-badge-text bold z-10'>NEW</span>
           </>
         )}
-        <div class="product-image">
+        <div className='product-image'>
           <img src={url} alt='productImage' />
         </div>
       </div>
-      <div class='card-content'>
-        <div class='flex'>
-          <div class='bold card-content-heading'>{name}</div>
+      <div className='card-content'>
+        <div className='flex'>
+          <div className='bold card-content-heading'>{name}</div>
           {isWishlisted ? (
             <i
-              class='fas fa-heart red cursor-pointer'
+              className='fas fa-heart red cursor-pointer'
               onClick={() => {
                 dispatch({
                   type: 'REMOVE_FROM_WISHLIST',
@@ -58,7 +110,7 @@ const ProductCard = ({
             ></i>
           ) : (
             <i
-              class='far fa-heart cursor-pointer'
+              className='far fa-heart cursor-pointer'
               onClick={() => {
                 dispatch({
                   type: 'ADD_TO_WISHLIST',
@@ -70,23 +122,23 @@ const ProductCard = ({
           )}
         </div>
 
-        <div class='thin card-content-subHeading'>{subHeading}</div>
-        <div class='card-content-description'>
-          <span class='bold'>Rs. {payableAmount} </span>
-          <span class='gray thin strike-through'>Rs. {price}</span>
-          <span class='dark-blue'>({discount}% OFF)</span>
+        <div className='thin card-content-subHeading'>{subHeading}</div>
+        <div className='card-content-description'>
+          <span className='bold'>Rs. {payableAmount} </span>
+          <span className='gray thin strike-through'>Rs. {price}</span>
+          <span className='dark-blue'>({discount}% OFF)</span>
         </div>
-        <div class='card-action'>
+        <div className='card-action'>
           {isAdded ? (
-            <button class='card-button'>
+            <button className='card-button'>
               <Link className='links' to='/cart'>
                 Go to Cart
-                <i class='fas fa-arrow-right pad-l-sm'></i>
+                <i className='fas fa-arrow-right pad-l-sm'></i>
               </Link>
             </button>
           ) : (
             <button
-              class='card-button'
+              className='card-button'
               onClick={() => {
                 dispatch({ type: 'ADD_TO_CART', payload: { productId: id } })
                 setIsAdded(true)

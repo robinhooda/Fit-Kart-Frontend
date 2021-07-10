@@ -44,3 +44,7 @@
   color: var(--dark-blue);
   background-color: white;
 }
+
+.shadow:hover {
+  filter: drop-shadow(2px 4px 8px #000);
+}
