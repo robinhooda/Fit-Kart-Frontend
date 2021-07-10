@@ -1,3 +1,19 @@
-.Home{
-    grid-area: "main";
+.Home {
+  grid-area: 'main';
+  width: 100vw;
+  overflow: hidden;
 }
+
+.homeBanner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.featuredProducts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
