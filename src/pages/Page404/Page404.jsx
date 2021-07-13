@@ -3,7 +3,7 @@ import NotFound404 from '../../assets/images/404-not-found.svg'
 import { Link } from 'react-router-dom'
 const Page404 = () => {
   return (
-    <div class='center'>
+    <div className='center'>
       <img src={NotFound404} alt='404 Not Found' className='noItemsFoundImg' />
       <h2 className='mar-sm'>Page Not Found</h2>
       <div className='text-center line-height-190'>

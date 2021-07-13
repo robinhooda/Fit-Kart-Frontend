@@ -7,33 +7,35 @@ import Loader from '../../components/Loader/Loader'
 import axios from 'axios'
 import { ProductData } from '../../api-data'
 import { useProducts } from '../../contexts/products-context'
+import { useAuth } from '../../contexts/AuthContext'
 
 const Shop = () => {
   // const { products } = useCart()
   // console.log({ products })
 
   const [product, setProduct] = useState([])
-  const {
-    dispatch: productDispatch,
-  } = useProducts()
+  const { dispatch: productDispatch } = useProducts()
+
+  const { auth } = useAuth()
   const [loading, setLoading] = useState(true)
+
   useEffect(() => {
-    console.log("shop ka useEffectchal rha hai")
     ;(async function () {
       try {
-
         const response = await axios.get('http://localhost:3020/products')
         console.log(response.data.products)
-        console.log("data aa gya")
+        console.log('data aa gya')
         setProduct(response.data.products)
         productDispatch({ type: 'PRODUCTS', payload: response.data.products })
         setLoading(false)
+        
       } catch (error) {
         console.log(error)
       }
     })()
   }, [])
 
+  
   return loading ? (
     <Loader />
   ) : (
@@ -43,6 +45,7 @@ const Shop = () => {
         {product.map((product) => {
           return (
             <ProductCard
+              key={product._id}
               id={product._id}
               name={product.name}
               url={product.url}

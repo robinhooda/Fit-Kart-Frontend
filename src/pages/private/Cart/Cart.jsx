@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useCart } from '../../../contexts/cart-context'
 import EmptyCartSVG from '../../../assets/images/empty_cart.svg'
 import { Link } from 'react-router-dom'
 import CartCard from '../../../components/CartCard/CartCard'
 import './Cart.css'
+import axios from 'axios'
+import { useAuth } from '../../../contexts/AuthContext'
 
 const Cart = () => {
   const { state } = useCart()
-  console.log(state)
+  const { auth } = useAuth()
+  console.log('mera state hai', state)
   const totalItems = state.cart.length
   const totalMRP = state.cart.reduce(
     (acc, cur) => acc + cur.price * cur.quantity,
@@ -18,6 +21,55 @@ const Cart = () => {
     return acc + discount
   }, 0)
   const totalAmountPayAble = totalMRP - totalDiscount
+
+  useEffect(() => {
+    ;(async function () {
+      try {
+        console.log('wishlist post ho rhi hai')
+        const response = await axios.post(
+          'http://localhost:3020/wishlist',
+          state.wishlist,
+          {
+            headers: {
+              'auth-token': auth,
+            },
+          }
+        )
+        const wishlistArr = response.data.wishList.wishlistItems
+        console.log({ wishlistArr })
+      } catch (err) {
+        console.log('Error!!!', err)
+      }
+    })()
+  }, [auth, state])
+
+  useEffect(() => {
+    ;(async function () {
+      const apiCart = state.cart.map((item) => {
+        const { quantity, ...product } = item
+        return {
+          product,
+          quantity,
+        }
+      })
+      try {
+        console.log('cart post ho rhi hai')
+        const response = await axios.post(
+          'http://localhost:3020/cart',
+          apiCart,
+          {
+            headers: {
+              'auth-token': auth,
+            },
+          }
+        )
+        const cart = response.data
+        console.log({ cart })
+      } catch (err) {
+        console.log('Error!!!', err)
+      }
+    })()
+  }, [auth, state])
   return (
     <div className='cart'>
       {/* if no items are added */}

@@ -66,7 +66,7 @@ const SignUp = () => {
   return isloading ? (
     <Loader />
   ) : (
-    <div class='signup'>
+    <div className='signup'>
       <div className='signup-wrapper'>
         <h1 className='signup-heading dark-blue'>Create an account</h1>
         <input
