@@ -59,7 +59,9 @@ const CartProvider = ({ children }) => {
     })()
   }, [auth])
 
-  const [state, dispatch] = useReducer(cartReducer(products), {
+
+
+  const [state, dispatch] = useReducer(cartReducer(products,auth), {
     cart: [],
     wishlist: [],
   })
