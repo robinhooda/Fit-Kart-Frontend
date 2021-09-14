@@ -6,14 +6,14 @@ import '../../components/ProductCard/ProductCard.css'
 import { PRODUCTS_URL } from '../../services/url.service'
 
 const Home = () => {
-  console.log("hii",PRODUCTS_URL)
+  console.log('hii', PRODUCTS_URL)
   const [product, setProduct] = useState([])
 
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     ;(async function () {
-      console.log("hii",PRODUCTS_URL)
+      console.log('hii', PRODUCTS_URL)
       try {
         const response = await axios.get(PRODUCTS_URL)
         console.log(response.data.products)
@@ -26,7 +26,6 @@ const Home = () => {
     })()
   }, [])
 
-
   const featuredProducts = product.filter((product) => product.discount >= 20)
 
   return (
@@ -38,7 +37,7 @@ const Home = () => {
           style={{ width: '80%' }}
         />
       </div>
-      <h2 className='pad-lg'>Featured Prodssssucts of the week</h2>
+      <h2 className='pad-lg'>Featured Products of the week</h2>
       <div className='featuredProducts'>
         {featuredProducts.map((product) => {
           return (

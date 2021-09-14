@@ -11,8 +11,6 @@ import { useAuth } from '../../contexts/AuthContext'
 import { PRODUCTS_URL } from '../../services/url.service'
 
 const Shop = () => {
-  // const { products } = useCart()
-  // console.log({ products })
 
   const [product, setProduct] = useState([])
   const { dispatch: productDispatch } = useProducts()
