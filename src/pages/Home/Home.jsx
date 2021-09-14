@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import './Home.css'
 import ProductCard from '../../components/ProductCard/ProductCard'
-import { useProducts } from '../../contexts/products-context'
-import { useAuth } from '../../contexts/AuthContext'
 import axios from 'axios'
 import '../../components/ProductCard/ProductCard.css'
+import { PRODUCTS_URL } from '../../services/url.service'
 
 const Home = () => {
+  console.log("hii",PRODUCTS_URL)
   const [product, setProduct] = useState([])
-  const { dispatch: productDispatch } = useProducts()
 
-  const { auth } = useAuth()
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     ;(async function () {
+      console.log("hii",PRODUCTS_URL)
       try {
-        const response = await axios.get('http://localhost:3020/products')
+        const response = await axios.get(PRODUCTS_URL)
         console.log(response.data.products)
+        console.log('data aa gya')
         setProduct(response.data.products)
-        productDispatch({ type: 'PRODUCTS', payload: response.data.products })
         setLoading(false)
       } catch (error) {
         console.log(error)
       }
     })()
   }, [])
+
 
   const featuredProducts = product.filter((product) => product.discount >= 20)
 
@@ -38,7 +38,7 @@ const Home = () => {
           style={{ width: '80%' }}
         />
       </div>
-      <h2 className='pad-lg'>Featured Products of the week</h2>
+      <h2 className='pad-lg'>Featured Prodssssucts of the week</h2>
       <div className='featuredProducts'>
         {featuredProducts.map((product) => {
           return (
