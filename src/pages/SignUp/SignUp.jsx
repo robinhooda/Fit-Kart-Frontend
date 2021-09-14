@@ -3,7 +3,9 @@ import './SignUp.css'
 import { Link, useNavigate } from 'react-router-dom'
 import Loader from '../../components/Loader/Loader'
 import axios from 'axios'
+import { SIGNUP_URL } from '../../services/url.service'
 const SignUp = () => {
+  console.log(SIGNUP_URL)
   const [userData, setUserData] = useState({
     firstName: '',
     lastName: '',
@@ -48,7 +50,7 @@ const SignUp = () => {
   const createAccount = async (event) => {
     setIsloading(true)
     try {
-      const response = await axios.post('http://localhost:3020/signup', {
+      const response = await axios.post(SIGNUP_URL, {
         firstName: userData.firstName,
         lastName: userData.lastName,
         email: userData.email,

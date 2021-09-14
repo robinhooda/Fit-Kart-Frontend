@@ -5,8 +5,10 @@ import Loader from '../../components/Loader/Loader'
 import { useAuth } from '../../contexts/AuthContext'
 import axios from 'axios'
 import '../SignUp/SignUp.css'
+import { LOGIN_URL } from '../../services/url.service'
 
 const Login = () => {
+  console.log(LOGIN_URL)
   const [userData, setUserData] = useState({
     email: '',
     password: '',
@@ -45,7 +47,7 @@ const Login = () => {
     event.preventDefault()
     setIsloading(true)
     try {
-      const response = await axios.post('http://localhost:3020/login', {
+      const response = await axios.post(LOGIN_URL, {
         email: userData.email,
         password: userData.password,
       })

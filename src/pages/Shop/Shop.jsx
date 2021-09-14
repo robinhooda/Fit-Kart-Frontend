@@ -8,6 +8,7 @@ import axios from 'axios'
 import { ProductData } from '../../api-data'
 import { useProducts } from '../../contexts/products-context'
 import { useAuth } from '../../contexts/AuthContext'
+import { PRODUCTS_URL } from '../../services/url.service'
 
 const Shop = () => {
   // const { products } = useCart()
@@ -22,20 +23,18 @@ const Shop = () => {
   useEffect(() => {
     ;(async function () {
       try {
-        const response = await axios.get('http://localhost:3020/products')
+        const response = await axios.get(PRODUCTS_URL)
         console.log(response.data.products)
         console.log('data aa gya')
         setProduct(response.data.products)
         productDispatch({ type: 'PRODUCTS', payload: response.data.products })
         setLoading(false)
-        
       } catch (error) {
         console.log(error)
       }
     })()
   }, [])
 
-  
   return loading ? (
     <Loader />
   ) : (

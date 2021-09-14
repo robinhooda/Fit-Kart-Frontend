@@ -6,7 +6,6 @@ const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(
     JSON.parse(localStorage.getItem('auth-token')) || null
   )
-
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>
       {children}

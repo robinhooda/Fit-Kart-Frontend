@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import './WishList.css'
 import axios from 'axios'
 import { useAuth } from '../../../contexts/AuthContext'
+import { CART_URL, WISHLIST_URL } from '../../../services/url.service'
 const WishList = () => {
   const { state } = useCart()
   const { auth } = useAuth()
@@ -14,15 +15,11 @@ const WishList = () => {
     ;(async function () {
       try {
         console.log('wishlist post ho rhi hai')
-        const response = await axios.post(
-          'http://localhost:3020/wishlist',
-          state.wishlist,
-          {
-            headers: {
-              'auth-token': auth,
-            },
-          }
-        )
+        const response = await axios.post(WISHLIST_URL, state.wishlist, {
+          headers: {
+            'auth-token': auth,
+          },
+        })
         const wishlistArr = response.data.wishList.wishlistItems
         console.log({ wishlistArr })
       } catch (err) {
@@ -42,15 +39,11 @@ const WishList = () => {
       })
       try {
         console.log('cart post ho rhi hai')
-        const response = await axios.post(
-          'http://localhost:3020/cart',
-          apiCart,
-          {
-            headers: {
-              'auth-token': auth,
-            },
-          }
-        )
+        const response = await axios.post(CART_URL, apiCart, {
+          headers: {
+            'auth-token': auth,
+          },
+        })
         const cart = response.data
         console.log({ cart })
       } catch (err) {
