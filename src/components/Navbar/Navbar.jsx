@@ -11,7 +11,7 @@ const Navbar = () => {
 
   const logout = () => {
     setAuth(null)
-    localStorage.removeItem("auth-token");
+    localStorage.removeItem('auth-token')
   }
 
   return (
@@ -20,7 +20,7 @@ const Navbar = () => {
         <MdFitnessCenter size={35} />
         <div className='navbar-brand--name  bold'>Fit-Kart</div>
       </div>
-      <div>
+      {/* <div>
         <input
           type='text'
           placeholder='search here'
@@ -30,10 +30,13 @@ const Navbar = () => {
             border: '1px solid white',
           }}
         ></input>
-      </div>
+      </div> */}
       <div className='navbar-links'>
         <div>
-          <Link className={pathname === '/' ? 'links bold' : 'links'} to='/'>
+          <Link
+            className={pathname === '/' ? ' links bold ' : 'links'}
+            to='/'
+          >
             Home
           </Link>
         </div>

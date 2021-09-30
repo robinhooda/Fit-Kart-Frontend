@@ -11,20 +11,52 @@ import { useAuth } from '../../contexts/AuthContext'
 import { PRODUCTS_URL } from '../../services/url.service'
 
 const Shop = () => {
-
-  const [product, setProduct] = useState([])
-  const { dispatch: productDispatch } = useProducts()
+  const { state, dispatch: productDispatch } = useProducts()
 
   const { auth } = useAuth()
   const [loading, setLoading] = useState(true)
+
+  const sellingPrice = (price, discount) =>
+    price - Math.floor((price * discount) / 100)
+
+  const getSortedData = (productsList, sortBy) => {
+    if (sortBy && sortBy === 'PRICE_HIGH_TO_LOW') {
+      return [...productsList].sort(
+        (a, b) =>
+          sellingPrice(b.price, b.discount) - sellingPrice(a.price, a.discount)
+      )
+    }
+    if (sortBy && sortBy === 'PRICE_LOW_TO_HIGH') {
+      return [...productsList].sort(
+        (a, b) =>
+          sellingPrice(a.price, a.discount) - sellingPrice(b.price, b.discount)
+      )
+    }
+    return productsList
+  }
+
+  const getDataFilteredForStock = (productsList, isNewStock) =>
+    [...productsList].filter((item) => (isNewStock ? item.isNewStock : item))
+
+  const getDataFilteredForFastDelivery = (productsList, isFastDelivery) =>
+    [...productsList].filter((item) =>
+      isFastDelivery ? item.fastDelivery : item
+    )
+
+  const sortedData = getSortedData(state.products, state.sortBy)
+  const filteredStockData = getDataFilteredForStock(
+    sortedData,
+    state.showOnlyNewStock
+  )
+  const filteredData = getDataFilteredForFastDelivery(
+    filteredStockData,
+    state.showOnlyFastDelivery
+  )
 
   useEffect(() => {
     ;(async function () {
       try {
         const response = await axios.get(PRODUCTS_URL)
-        console.log(response.data.products)
-        console.log('data aa gya')
-        setProduct(response.data.products)
         productDispatch({ type: 'PRODUCTS', payload: response.data.products })
         setLoading(false)
       } catch (error) {
@@ -39,7 +71,7 @@ const Shop = () => {
     <div className='Shop'>
       <Aside />
       <div className='main'>
-        {product.map((product) => {
+        {filteredData.map((product) => {
           return (
             <ProductCard
               key={product._id}

@@ -7,6 +7,8 @@ const ProductsProvider = ({ children }) => {
   const [state, dispatch] = useReducer(productsReducer, {
     products: [],
     sortBy: 'none',
+    showOnlyFastDelivery: false,
+    showOnlyNewStock: false,
     priceRange: 0,
   })
 

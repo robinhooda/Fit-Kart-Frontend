@@ -5,12 +5,13 @@
   right: 0;
   border-bottom: 1px solid black;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   background-color: #2874f0;
   color: white;
   z-index: 1;
   height: 10vh;
+  padding: 0rem 5rem;
 }
 
 .navbar-brand {
@@ -21,10 +22,10 @@
 }
 
 .navbar-links {
-  width: 40%;
+  width: 50%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .bold {
