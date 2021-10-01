@@ -54,7 +54,7 @@
 }
 
 .full-width-primary-button:hover {
-  background-color: var(--dark-blue);
+  background: var(--primary-color-hover);
 }
 
 .login-img {
