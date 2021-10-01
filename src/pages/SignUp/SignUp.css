@@ -43,17 +43,18 @@
 
 .full-width-primary-button {
   padding: 0.5rem 0;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   width: 100%;
   text-align: center;
   background-color: var(--dark-blue);
   color: white;
   border: 1px solid var(--dark-blue);
   border-radius: 0.4rem;
+  cursor: pointer;
 }
 
 .full-width-primary-button:hover {
-  opacity: 93%;
+  background-color: var(--dark-blue);
 }
 
 .login-img {

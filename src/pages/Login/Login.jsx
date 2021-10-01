@@ -8,7 +8,6 @@ import '../SignUp/SignUp.css'
 import { LOGIN_URL } from '../../services/url.service'
 
 const Login = () => {
-  console.log(LOGIN_URL)
   const [userData, setUserData] = useState({
     email: '',
     password: '',
@@ -51,7 +50,6 @@ const Login = () => {
         email: userData.email,
         password: userData.password,
       })
-      console.log(response)
       setUserData({ email: '', password: '' })
 
       const authToken = response.data.token
@@ -99,7 +97,18 @@ const Login = () => {
         <button className='full-width-primary-button' onClick={loginAccount}>
           LOGIN
         </button>
-        <small>
+        <button
+          className='full-width-primary-button'
+          onClick={() =>
+            setUserData({
+              email: 'abcdef@gmail.com',
+              password: 'hja@1996',
+            })
+          }
+        >
+          LOGIN WITH TEST CREDENTIALS
+        </button>
+        <small className='pad-t-xs'>
           Don't have an account?
           <Link className='links' to='/signUp'>
             <span className='bold underlined dark-blue pad-l-xs'>Sign Up</span>
