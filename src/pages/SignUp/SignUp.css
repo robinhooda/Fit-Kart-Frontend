@@ -53,7 +53,7 @@
 }
 
 .full-width-primary-button:hover {
-  opacity: 93%;
+  background: var(--primary-color-hover);
 }
 
 .login-img {
